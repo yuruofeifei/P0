@@ -210,7 +210,11 @@ func bytesArraysEqual(arr1, arr2 []([]byte)) bool {
 	}
 
 	for i := 0; i < len(arr1); i++ {
-		if string(arr1[i]) != string(arr2[i]) {
+		// Trim optional '\n' endings
+		str1 := string(bytes.Trim(arr1[i], "\n"))
+		str2 := string(bytes.Trim(arr2[i], "\n"))
+
+		if str1 != str2 {
 			return false
 		}
 	}
